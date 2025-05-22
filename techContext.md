@@ -1,4 +1,4 @@
-# Tech Context: Zidio AI-Powered Task Optimizer (Simplified MVP Focus)
+# Tech Context: TaskNova (Simplified MVP Focus)
 
 ## 1. Selected Technology Stack (MVP)
 

@@ -1,4 +1,4 @@
-# Project Progress: Zidio AI-Powered Task Optimizer
+# Project Progress: TaskNova
 
 **Last Updated:** 2025-05-21
 

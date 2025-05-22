@@ -1,8 +1,8 @@
-# Project Brief: Zidio AI-Powered Task Optimizer
+# Project Brief: TaskNova
 
 ## 1. Project Overview
 
-The Zidio AI-Powered Task Optimizer is a system designed to leverage data science and machine learning techniques to analyze employee emotions and moods. The primary goal is to enhance employee productivity and well-being by providing insights into their emotional state and recommending tasks that align with their current mood. Additionally, the system aims to detect early signs of stress, burnout, or other negative emotions, notifying HR or higher authorities to enable timely support and intervention. This will foster a healthier and more empathetic workplace environment.
+TaskNova is a system designed to leverage data science and machine learning techniques to analyze employee emotions and moods. The primary goal is to enhance employee productivity and well-being by providing insights into their emotional state and recommending tasks that align with their current mood. Additionally, the system aims to detect early signs of stress, burnout, or other negative emotions, notifying HR or higher authorities to enable timely support and intervention. This will foster a healthier and more empathetic workplace environment.
 
 ## 2. Core Objectives
 

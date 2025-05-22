@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api import tasks_router, emotion_router
 
-app = FastAPI(title="Zidio AI Task Optimizer API")
+app = FastAPI(title="TaskNova API")
 
 origins = [
     "http://localhost",
@@ -26,7 +26,7 @@ app.include_router(emotion_router.router, prefix="/api/v1", tags=["Emotion Analy
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to Zidio AI Task Optimizer Backend!"}
+    return {"message": "Welcome to TaskNova Backend!"}
 
 # Uncomment this :- To run this app (if this file is executed directly, for dev):
 if __name__ == "__main__":

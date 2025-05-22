@@ -1,61 +1,10 @@
-# System Patterns: Zidio AI-Powered Task Optimizer
+# System Patterns: TaskNova
 
 ## 1. Architectural Approach
 
 A **Modular Monolith** architecture is proposed for the initial development phase, balancing development speed with future scalability. Key modules will be designed with clear interfaces, allowing them to be potentially extracted into microservices later if needed.
 
 ## 2. Core System Modules
-
-```mermaid
-graph TD
-    A[Input Sources] --> B(Data Ingestion & Preprocessing Module);
-    B --> C{Emotion Analysis Engine};
-    C --> D[User Mood Profile Store];
-    C --> E{Task Recommendation Engine};
-    E --> F[Task Definitions Store];
-    E --> G(Frontend Applications);
-    D --> G;
-    D --> H{Historical Mood Tracking & Analytics Module};
-    H --> I[Anonymized Analytics Store];
-    H --> G;
-    C --> J{Stress & Burnout Detection Module};
-    J --> K(Alerting System);
-    K --> L[HR/Manager Interfaces via Frontend];
-    G --> M{API Gateway};
-    M --> B;
-    M --> C;
-    M --> E;
-    M --> H;
-    M --> J;
-
-    subgraph Frontend
-        G
-        L
-    end
-
-    subgraph BackendCore
-        B
-        C
-        E
-        H
-        J
-        K
-        M
-    end
-
-    subgraph DataStores
-        D
-        F
-        I
-    end
-
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style G fill:#ccf,stroke:#333,stroke-width:2px
-    style L fill:#ccf,stroke:#333,stroke-width:2px
-    style D fill:#cfc,stroke:#333,stroke-width:2px
-    style F fill:#cfc,stroke:#333,stroke-width:2px
-    style I fill:#cfc,stroke:#333,stroke-width:2px
-```
 
 ```mermaid
 graph TD

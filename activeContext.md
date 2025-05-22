@@ -1,14 +1,14 @@
-# Active Context: Zidio AI-Powered Task Optimizer
+# Active Context: TaskNova
 
 ## Current Focus: Code Refactoring & Frontend Feature Expansion
 
 **Date:** 2025-05-22
 
-**Status:** Post-MVP implementation. User requested code refactoring for better structure and significant frontend enhancements including navigation and new sections.
+**Status:** Post-MVP implementation. User requested code refactoring for better structure and significant frontend enhancements including navigation and new sections. Project name changed to TaskNova.
 
 ## Recent Decisions & Key Insights:
 
-1.  **Project Name:** Zidio AI-Powered Task Optimizer.
+1.  **Project Name:** TaskNova.
 2.  **Core Goal (Current Phase):** Refactor existing code for better readability and folder structure. Enhance frontend with a header, navigation (Home, Add Tasks, Remove Tasks, Give Tasks), and make it responsive. Implement backend logic for removing tasks.
 3.  **Technology Stack (Confirmed):
     *   **Frontend:** React with Vite, Tailwind CSS, React Router.

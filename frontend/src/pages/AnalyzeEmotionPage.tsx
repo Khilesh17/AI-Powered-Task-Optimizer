@@ -89,7 +89,7 @@ const AnalyzeEmotionPage: React.FC = () => {
 
     return (
         <div className="bg-gray-800 p-6 md:p-8 rounded-lg shadow-xl w-full max-w-2xl flex flex-col items-center justify-center animate-fadeIn">
-            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-sky-400">Zidio Facial Emotion Analyzer</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-sky-400">TaskNova Facial Emotion Analyzer</h1>
             <div className="w-full mb-4 p-4 border border-gray-700 rounded-md bg-gray-850 text-center">
                 {!stream ? (
                     <button onClick={startCamera} className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-md transition">Start Camera</button>

@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-bold text-sky-400">
-              Zidio Optimizer
+              TaskNova
             </Link>
           </div>
           <nav className="hidden md:block">

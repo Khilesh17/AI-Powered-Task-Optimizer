@@ -22,7 +22,7 @@ function App() {
         </Routes>
       </main>
       <footer className="w-full bg-gray-800 text-center text-gray-500 text-sm py-4 mt-auto">
-        <p>&copy; {new Date().getFullYear()} Zidio AI Task Optimizer</p>
+        <p>&copy; {new Date().getFullYear()} TaskNova - AI Task Optimizer</p>
       </footer>
     </div>
   );

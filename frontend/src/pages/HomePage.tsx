@@ -1,10 +1,29 @@
 import React from 'react';
+import TeamMemberCard from '../components/TeamMemberCard';
+import khileshImage from "../assets/khilesh.jpg";
+
+// Define the TeamMember interface (could also be in a shared types file)
+interface TeamMember {
+    id: number;
+    name: string;
+    role: string;
+    imageUrl: string;
+    linkedinUrl?: string;
+}
+
+const teamMembers: TeamMember[] = [
+    { id: 1, name: 'Khilesh Katre', role: 'Team Lead + Full Stack Developer', imageUrl: khileshImage, linkedinUrl: 'https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAADjH628BmoTC5jQtHxxbMesYQYeigrq1JOc&keywords=Khilesh%20Katre&origin=ENTITY_SEARCH_HOME_HISTORY&sid=Ok!' },
+    { id: 2, name: 'Tripti', role: 'Full Stack Developer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
+    { id: 3, name: 'Shriyansh Shrivastava ', role: 'Designer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
+    { id: 4, name: 'Raj Aryan Purohit', role: 'Devops Engineer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
+];
+
 
 const HomePage: React.FC = () => {
     return (
         <div className="p-6 md:p-8 text-center animate-fadeIn">
             <h2 className="text-4xl font-bold text-sky-400 mb-6">
-                Welcome to Zidio AI Task Optimizer!
+                Welcome to TaskNova!
             </h2>
             <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
                 Discover a new way to align your tasks with your emotional state. Our application uses cutting-edge facial emotion analysis to understand how you're feeling and suggests tasks that best suit your current mood, aiming to enhance both your productivity and well-being.
@@ -23,18 +42,15 @@ const HomePage: React.FC = () => {
                     </p>
                 </div>
             </div>
-            <div className="bg-gray-700 p-6 rounded-lg shadow-lg w-full max-w-3xl mx-auto">
-                <h3 className="text-2xl font-semibold text-sky-300 mb-4">Meet the Team (Placeholder)</h3>
-                <p className="text-gray-400 mb-2">
-                    Our dedicated team is passionate about leveraging AI for a better work-life experience.
-                </p>
-                <ul className="text-gray-400 list-disc list-inside">
-                    <li>Khilesh Katre - Team Lead + Full Stack Developer</li>
-                    <li>Tripti - Full Stack Developer</li>
-                    <li>Shriyansh Shrivastava - Designer</li>
-                    <li>Raj Aryan Purohit - Devops Engineer</li>
-                    {/* Add more team members and roles as needed */}
-                </ul>
+
+            {/* Team Section */}
+            <div className="w-full max-w-5xl mx-auto">
+                <h3 className="text-3xl font-bold text-sky-300 mb-8 text-center">Meet the Team</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+                    {teamMembers.map(member => (
+                        <TeamMemberCard key={member.id} member={member} />
+                    ))}
+                </div>
             </div>
         </div>
     );

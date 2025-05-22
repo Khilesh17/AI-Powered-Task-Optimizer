@@ -1,4 +1,4 @@
-# Product Context: Zidio AI-Powered Task Optimizer
+# Product Context: TaskNova
 
 ## 1. Problem Statement
 
@@ -50,4 +50,4 @@ In modern workplaces, employee well-being is increasingly recognized as a critic
 
 ## 4. Value Proposition
 
-Zidio offers a unique solution that bridges the gap between employee well-being and productivity. By understanding and responding to the emotional state of employees, it empowers individuals to work more effectively, helps HR and managers to provide timely support, and cultivates a healthier, more engaged, and ultimately more productive workforce.
+TaskNova offers a unique solution that bridges the gap between employee well-being and productivity. By understanding and responding to the emotional state of employees, it empowers individuals to work more effectively, helps HR and managers to provide timely support, and cultivates a healthier, more engaged, and ultimately more productive workforce.
