@@ -17,8 +17,8 @@ TaskNova is a system designed to leverage data science and machine learning tech
 
 ## 3. Key Features
 
-- **Real-Time Emotion Detection:** Initial MVP focus on live camera video processing for facial emotion detection. Text and speech analysis are potential future enhancements.
-- **Task Recommendation:** Intelligent suggestion of tasks based on the detected mood of the employee.
+- **Real-Time Emotion Detection:** User can choose between single-frame facial emotion analysis (visual only) or a 10-second continuous multi-modal analysis period. The multi-modal analysis will integrate results from facial expression, voice tonality, and optional typed text to determine the most prominent emotion.
+- **Task Recommendation:** Suggestion of all relevant tasks (from user-defined list) based on the detected mood of the employee.
 - **Historical Mood Tracking:** Maintenance of a timeline for each employee's mood trends to identify patterns and provide insights for long-term well-being.
 - **Stress Management Alerts:** Automated notifications to HR or managers when an employee's mood indicates prolonged stress or disengagement.
 - **Team Mood Analytics:** Aggregation of mood data to identify overall team morale and productivity trends.
