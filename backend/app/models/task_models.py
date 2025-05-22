@@ -14,5 +14,5 @@ class Task(TaskBase):
     created_at: datetime
 
 class TaskSuggestionResponse(BaseModel):
-    suggested_task: Optional[Task] = None
+    suggested_tasks: List[Task] = [] # Changed to a list
     message: str

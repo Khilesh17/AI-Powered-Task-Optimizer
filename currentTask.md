@@ -1,61 +1,56 @@
-# Current Task: Implement Common Button & Confirmation Modal
+# Current Task: Implement Dual Analysis Modes & Enhanced Task Suggestions
 
  **Date:** 2025-05-22
 
- **Objective:** To create reusable `Button` and `ConfirmationModal` components and integrate them into the Add Task and Remove Task pages for user confirmation actions.
+ **Objective:** To provide users with two options for facial emotion analysis: single-frame analysis and a 10-second continuous analysis period. Modify the task suggestion feature to display all tasks relevant to the detected emotion. Ensure all interactive buttons use the common `Button.tsx` component.
 
- **Previous Task Summary (Refactor & Multi-Section Frontend):** 
-* Backend and frontend codebases were refactored into more organized folder structures.
-* Frontend navigation with Header and multiple pages (Home, Analyze, Add Task, Remove Task) was implemented using React Router.
-* Basic functionality for each page was set up.
-* User requested common UI components for confirmations.
+ **Previous Task Summary (Continuous Analysis & Button Standardization):** 
+* Logic for 10-second continuous emotion analysis was implemented in `AnalyzeEmotionPage.tsx`.
+* User requested an additional option for single-frame analysis and to display all relevant tasks.
 
 ## Task Breakdown & Checklist:
 
-* [x] **1. Create Common Components Directory:** (Completed 2025-05-22)
-    - [x] Ensured `/frontend/src/components/common/` directory exists.
+* [x] **1. Backend - Modify Task Suggestion Endpoint:** (Completed 2025-05-22)
+    - [x] In `backend/app/services/task_service.py`:
+        - Modified `get_task_suggestion_for_emotion` to `get_task_suggestions_for_emotion` and to return a list of all suitable task dictionaries.
+    - [x] In `backend/app/api/tasks_router.py`:
+        - Updated the `get_task_suggestion_endpoint` (`GET /api/v1/tasks/suggestion`):
+            - Changed its response model (`TaskSuggestionResponse`) to include `suggested_tasks: List[Task]`.
+            - Updated logic to use new service function and return all suitable tasks.
 
-* [x] **2. Implement `Button.tsx` Component:** (Completed 2025-05-22)
-    - [x] Created `/frontend/src/components/common/Button.tsx`.
-    - [x] Defined props: `onClick`, `text`, `variant ('primary' | 'secondary' | 'danger' | 'outline')`, `disabled`, `type`, `children`.
-    - [x] Styled using Tailwind CSS for dark theme, ensuring variants are distinct.
-    - [x] Ensured basic accessibility (e.g., focus states).
+* [x] **2. Frontend - `AnalyzeEmotionPage.tsx` Enhancements:** (Completed 2025-05-22)
+    - [x] **UI for Dual Analysis Modes:** 
+        - Added two distinct buttons: "Analyze Single Frame" and "Start 10-Sec Analysis".
+    - [x] **Single-Frame Analysis Logic (`captureSingleFrameAndAnalyze` function):** 
+        - Implemented one-time capture, analysis, and call to `fetchTaskSuggestionsList`.
+    - [x] **Continuous Analysis Logic (`startAnalysisPeriod` function):** 
+        - Existing logic adapted; `processCollectedEmotions` calls `fetchTaskSuggestionsList`.
+    - [x] **New `fetchTaskSuggestionsList` function:** 
+        - Implemented to call the updated backend endpoint and handle a list of tasks.
+        - Updates `suggestedTasksList` state.
+    - [x] **Displaying Multiple Task Suggestions:** 
+        - JSX modified to render a list of suggested tasks.
+    - [x] Ensured all buttons on this page use the common `<Button />` component.
 
-* [x] **3. Implement `ConfirmationModal.tsx` Component:** (Completed 2025-05-22)
-    - [x] Created `/frontend/src/components/common/ConfirmationModal.tsx`.
-    - [x] Defined props: `isOpen`, `onClose`, `title`, `message`, `confirmText`, `onConfirm`, `cancelText`, `confirmButtonVariant`.
-    - [x] Structured with overlay, panel, title, message, and action buttons using `Button` component.
-    - [x] Styled for dark theme.
-    - [x] Modal is dismissible via cancel button and overlay click.
+* [ ] **3. Frontend - General Button Replacement (Final Check):** 
+    - [ ] Briefly re-check `AddTaskPage.tsx`, `RemoveTaskPage.tsx`, `NotFoundPage.tsx` (if applicable for any non-Link buttons) to ensure all clickable actions that are not navigational links are using the `<Button />` component.
 
-* [x] **4. Integrate `ConfirmationModal` into `AddTaskPage.tsx`:** (Completed 2025-05-22)
-    - [x] Imported `ConfirmationModal` and `Button`.
-    - [x] Added state to manage modal visibility.
-    - [x] Modified task creation submission logic to show modal first.
-    - [x] Configured `ConfirmationModal` props and rendered it.
-
-* [x] **5. Integrate `ConfirmationModal` into `RemoveTaskPage.tsx`:** (Completed 2025-05-22)
-    - [x] Imported `ConfirmationModal` and `Button`.
-    - [x] Added state to manage modal visibility and targeted task ID.
-    - [x] Modified task deletion logic to show modal first.
-    - [x] Configured `ConfirmationModal` props and rendered it.
-
-* [ ] **6. Testing:** 
-    - [ ] Test task creation confirmation flow.
-    - [ ] Test task deletion confirmation flow for multiple tasks.
-    - [ ] Verify modal appearance and behavior (opening, closing, button actions).
-    - [ ] Check basic responsiveness of the modal.
+* [ ] **4. Testing:** 
+    - [ ] Test single-frame analysis: verify correct emotion and all related tasks are shown.
+    - [ ] Test 10-second continuous analysis: verify correct aggregated emotion and all related tasks are shown.
+    - [ ] Test scenarios where no tasks match the detected emotion for both modes.
+    - [ ] Test UI feedback and button states for both analysis modes.
+    - [ ] Confirm all buttons across the application are consistently styled and functional.
 
 ## Implementation Notes:
 
-* New components are placed in `/frontend/src/components/common/`.
-* Focus was on clear prop definitions and reusability.
-* Maintained consistency with the existing dark theme and Tailwind CSS usage.
+* The backend change to the suggestion endpoint is critical before fully implementing the frontend display of multiple tasks.
+* The `AnalyzeEmotionPage.tsx` will become more complex; manage state carefully.
+* Consider user experience for displaying potentially many suggested tasks (e.g., scrollable list).
 
 ## Acceptance Criteria:
 
-* `Button.tsx` component is created with variants and is functional. (Achieved)
-* `ConfirmationModal.tsx` component is created, functional, and styled appropriately. (Achieved)
-* Users are prompted with a confirmation modal before a task is created via `AddTaskPage.tsx`. (Achieved)
-* Users are prompted with a confirmation modal before a task is deleted via `RemoveTaskPage.tsx`. (Achieved)
-* The confirmation modals correctly trigger or cancel the respective actions. (Pending full testing by user)
+* User can choose between "Analyze Single Frame" and "Start 10-Sec Analysis" on the Analyze Emotion page.
+* Both analysis modes correctly detect an emotion and then display a list of all tasks associated with that emotion.
+* If no tasks are associated, an appropriate message is shown.
+* All action-triggering buttons in the application use the common `Button.tsx` component.

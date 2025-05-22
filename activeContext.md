@@ -1,35 +1,34 @@
 # Active Context: TaskNova
 
-## Current Focus: Common UI Components & Integration
+## Current Focus: Dual Emotion Analysis Modes & Enhanced Task Suggestion
 
 **Date:** 2025-05-22
 
-**Status:** Continuing frontend enhancements. User requested creation of common Button and ConfirmationModal components and their integration.
+**Status:** Implementing user choice between single-frame and 10-second continuous emotion analysis. Modifying task suggestion to show all relevant tasks.
 
 ## Recent Decisions & Key Insights:
 
 1.  **Project Name:** TaskNova.
-2.  **Core Goal (Current Phase):** Create reusable Button and ConfirmationModal components. Integrate modal for task creation and deletion confirmations. Ensure consistent styling.
+2.  **Core Goal (Current Phase):** Provide two analysis modes (single frame, 10s continuous). Suggest all tasks matching the detected emotion. Ensure all buttons use the common `Button` component.
 3.  **Technology Stack (Confirmed):
     *   **Frontend:** React with Vite, Tailwind CSS, React Router.
     *   **Backend:** Python with FastAPI.
     *   **Task Storage:** Local JSON file (`tasks.json`).
-    *   **ML:** Pre-trained facial emotion recognition model (`deepface`).
+    *   **ML:** `deepface` for facial emotion recognition (backend processing per frame).
 4.  **Expanded Scope (Current Phase):
-    *   **Common Button Component:** Create `Button.tsx` with variants.
-    *   **Confirmation Modal Component:** Create `ConfirmationModal.tsx` for user confirmations.
-    *   **Integration:** Use `ConfirmationModal` in `AddTaskPage.tsx` and `RemoveTaskPage.tsx`.
-    *   **Code Refactoring:** (Ongoing) Organize frontend and backend code into logical folder structures.
-    *   **Frontend Navigation:** (Completed) Implemented header and routing.
-    *   **Home, Add/Remove Tasks, Analyze Pages:** (Basic versions implemented).
-    *   **Responsiveness:** (Ongoing, to be reviewed).
-    *   **Backend Task Deletion:** (Completed) Implemented `DELETE /tasks/{task_id}` endpoint.
+    *   **Dual Analysis Modes:** Implement UI and logic for both single-frame and 10-second continuous analysis on `AnalyzeEmotionPage.tsx`.
+    *   **Display All Suggested Tasks:** Modify frontend to display a list of tasks if multiple are returned by the backend.
+    *   **Backend Task Suggestion Update:** Modify `/api/v1/tasks/suggestion` to return all matching tasks.
+    *   **Button Replacement:** (Ongoing) Ensure all standard buttons are replaced with `<Button />`.
+    *   **Continuous Emotion Analysis:** (Partially Implemented - needs UI for dual mode) Frontend captures frames over 10s, aggregates results.
+    *   **Common UI Components:** (Completed) `Button.tsx`, `ConfirmationModal.tsx`.
+    *   **Previous Features:** Code refactoring, navigation, page structure, task management (CRUD on tasks.json) are largely in place.
 5.  **Architectural Approach:** Modular Monolith (as per `systemPatterns.md`), with new Task Management capabilities.
 
 ## Next Steps:
 
-1.  Update `currentTask.md` to detail implementation of `Button.tsx` and `ConfirmationModal.tsx` and their integration.
-2.  Update `progress.md` with these new component development milestones.
+1.  Update `currentTask.md` to detail implementation of dual analysis modes and updated task suggestion display.
+2.  Update `progress.md` with these new feature milestones.
 3.  Proceed with implementation in Act Mode.
 
 ## Resolved Questions:

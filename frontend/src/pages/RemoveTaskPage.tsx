@@ -58,17 +58,21 @@ const RemoveTaskPage: React.FC = () => {
             }
             setDeleteStatus(prev => ({ ...prev, [taskToDeleteId]: 'Deleted successfully!' }));
             fetchTasks();
+            const deletedTaskId = taskToDeleteId; // Capture the ID at the time of deletion
             setTimeout(() => {
-                setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: null }));
-                setTaskToDeleteId(null);
+                setDeleteStatus(prev => ({ ...prev, [deletedTaskId!]: null }));
+                // Only nullify taskToDeleteId if it hasn't been changed by a new delete request
+                setTaskToDeleteId(currentId => currentId === deletedTaskId ? null : currentId);
             }, 3000);
         } catch (err) {
+            const failedTaskId = taskToDeleteId; // Capture the ID
             const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred during deletion.';
-            setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: errorMessage }));
-            console.error(`Failed to delete task ${taskToDeleteId}:`, err);
+            setDeleteStatus(prev => ({ ...prev, [failedTaskId!]: errorMessage }));
+            console.error(`Failed to delete task ${failedTaskId}:`, err);
             setTimeout(() => {
-                setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: null }));
-                setTaskToDeleteId(null);
+                setDeleteStatus(prev => ({ ...prev, [failedTaskId!]: null }));
+                // Only nullify taskToDeleteId if it hasn't been changed by a new delete request
+                setTaskToDeleteId(currentId => currentId === failedTaskId ? null : currentId);
             }, 5000);
         }
     };

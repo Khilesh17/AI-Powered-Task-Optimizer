@@ -47,7 +47,7 @@ def create_new_task(description: str, associated_emotions: List[str]) -> Dict:
     save_tasks_to_file(tasks)
     return new_task_data
 
-def get_task_suggestion_for_emotion(emotion: str) -> Optional[Dict]:
+def get_task_suggestions_for_emotion(emotion: str) -> List[Dict]: # Renamed and changed return type
     normalized_emotion = emotion.lower()
     tasks = load_tasks_from_file()
     
@@ -56,9 +56,7 @@ def get_task_suggestion_for_emotion(emotion: str) -> Optional[Dict]:
         if normalized_emotion in [e.lower() for e in task.get("associated_emotions", [])]
     ]
     
-    if not suitable_tasks:
-        return None
-    return random.choice(suitable_tasks)
+    return suitable_tasks # Return all suitable tasks
 
 def delete_task_by_id(task_id: str) -> bool:
     tasks = load_tasks_from_file()

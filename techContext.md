@@ -21,7 +21,7 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
     - New Task Endpoints:
         - `POST /tasks` (Create a new task)
         - `GET /tasks` (List all tasks - for potential admin/debug)
-        - `GET /tasks/suggestion?emotion={emotion}` (Get a task suggestion for a given emotion)
+        - `GET /tasks/suggestion?emotion={emotion}` (Get all task suggestions for a given emotion; returns a list)
         - `DELETE /tasks/{task_id}` (Delete a specific task)
 
 ### 1.3. Task Storage (MVP)
@@ -33,7 +33,10 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
     - `created_at`: String (ISO 8601 timestamp)
 
 ### 1.4. Machine Learning & AI (MVP)
-- **Emotion Detection - Facial:** Using a library like `deepface` or OpenCV with a pre-trained facial emotion recognition (FER) model. The frontend will capture an image/video frame and send it to the backend for analysis. Focus on basic emotion classification (e.g., happy, sad, neutral, angry, surprise).
+- **Emotion Detection - Facial:** Using `deepface` on the backend. Frontend provides two modes: 
+    1.  **Single Frame Analysis:** Captures one frame, sends to backend for immediate analysis.
+    2.  **Continuous Analysis (10s):** Captures frames over 10 seconds (e.g., 1 frame/sec). Each frame sent to backend. Frontend aggregates results (e.g., most frequent dominant emotion) to determine overall emotion for the period.
+    Focus on basic emotion classification.
 
 ### 1.5. Infrastructure & Deployment (Initial)
 - **Containerization:** Docker (for local development consistency).
@@ -43,7 +46,7 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
 ## 2. Technical Constraints & Considerations (MVP Focus)
 
 - **Data Privacy & Security:** Basic secure practices for data handling. Full compliance measures (GDPR etc.) are for future scope beyond initial MVP, but good principles will be followed.
-- **Real-time Processing:** Frontend will capture a frame from live camera. Backend processing of the single frame doesn't need to be strictly real-time, but responsive enough for a good user experience.
+- **Real-time Processing:** Frontend will capture multiple frames over a short period (e.g., 10 seconds). Backend processing for each frame should be responsive. The overall user experience is near real-time for the analysis period.
 - **Scalability:** MVP will not be designed for high scalability; focus is on a working simple version.
 - **Model Accuracy & Bias:** Use a standard pre-trained model. In-depth bias analysis is beyond MVP scope.
 - **Integration:** No third-party integrations for MVP.
