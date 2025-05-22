@@ -9,6 +9,7 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
 - **UI Styling:** Tailwind CSS (DaisyUI can still be used if desired, or another React component library like Material UI, Chakra UI, or Mantine, adapted for dark mode).
 - **State Management:** Zustand or Redux Toolkit (Zustand for simplicity, Redux Toolkit for more complex state).
 - **Data Fetching:** TanStack Query (React Query) or native `fetch`.
+- **Routing:** React Router (`react-router-dom`) for multi-page/section navigation.
 
 ### 1.2. Backend
 - **Language/Framework:** Python with FastAPI (Reverted to Python for stronger Computer Vision library support for facial detection).
@@ -18,6 +19,7 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
         - `POST /tasks` (Create a new task)
         - `GET /tasks` (List all tasks - for potential admin/debug)
         - `GET /tasks/suggestion?emotion={emotion}` (Get a task suggestion for a given emotion)
+        - `DELETE /tasks/{task_id}` (Delete a specific task)
 
 ### 1.3. Task Storage (MVP)
 - **Method:** Local JSON file (`tasks.json`) in the backend directory.
@@ -45,16 +47,17 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
 - **Cross-Platform Compatibility:** Web application should be responsive for modern desktop browsers.
 - **Dark Mode UX:** UI will be dark mode by default.
 
-## 3. Initial Focus (Simplified MVP)
+## 3. Current Focus (Refactoring & Feature Expansion)
 
-- **Core Feature 1: Facial Emotion Detection:**
-    - Simple UI for camera access and capturing an image/frame.
-    - Backend analyzes the captured image using a facial emotion recognition model.
-- **Core Feature 2: Basic Task Suggestion:**
-    - Suggest 1-2 predefined tasks based on the detected mood.
-- **Core Feature 3: Simple Mood Logging:**
-    - Allow users to log their detected mood with a timestamp (stored locally or in a simple DB table).
-- **User Interface:**
-    - Single-page application (SPA) feel.
-    - Clean, minimalist dark mode UI.
-- **Out of Scope for Initial MVP:** Real-time video/speech processing, complex historical analytics, HR/Manager dashboards, advanced alert systems, user accounts/authentication (can be mocked or very basic if needed for structure).
+- **Code Refactoring:** Improve code readability and maintainability by organizing code into a better folder structure (both frontend and backend).
+- **Frontend Enhancements:**
+    - Implement a header and navigation structure.
+    - Create distinct sections/pages using React Router:
+        - Home: Information about the website, team, and roles.
+        - Add Tasks: UI for creating new tasks.
+        - Remove Tasks: UI for listing and deleting existing tasks.
+        - Give Tasks (Emotion Analysis): The existing facial emotion detection and dynamic task suggestion feature.
+    - Ensure the UI is responsive across different screen sizes.
+- **Backend Enhancements:**
+    - Implement `DELETE /tasks/{task_id}` endpoint.
+    - Refactor backend code into a more organized structure if necessary (e.g., routers, services/models for tasks).

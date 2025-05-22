@@ -1,34 +1,34 @@
 # Active Context: Zidio AI-Powered Task Optimizer
 
-## Current Focus: Finalizing Simplified MVP Plan
+## Current Focus: Code Refactoring & Frontend Feature Expansion
 
-**Date:** 2025-05-21
+**Date:** 2025-05-22
 
-**Status:** Planning phase. Core Memory Bank files created. Technology stack and MVP scope have been simplified based on user feedback for an initial working version.
+**Status:** Post-MVP implementation. User requested code refactoring for better structure and significant frontend enhancements including navigation and new sections.
 
 ## Recent Decisions & Key Insights:
 
 1.  **Project Name:** Zidio AI-Powered Task Optimizer.
-2.  **Core Goal (MVP):** Create a simple application to analyze employee mood from facial expressions (captured via camera) and suggest basic tasks. UI must be dark mode.
-3.  **Simplified Technology Stack (Finalized for MVP):
-    *   **Frontend:** React with Vite, Tailwind CSS (optionally DaisyUI or other React component libraries).
-    *   **Backend:** Python with FastAPI (Reverted for better Computer Vision support).
-    *   **Task Storage:** Local JSON file (`tasks.json`) instead of a database for MVP simplicity.
-    *   **ML:** Pre-trained facial emotion recognition model (e.g., using `deepface` or OpenCV with a FER model).
-4.  **Simplified MVP Scope (Finalized - Now includes Task Management):
-    *   Core Feature 1: Facial emotion detection from camera image/frame.
-    *   Core Feature 2: User ability to define new tasks and associate them with emotions.
-    *   Core Feature 3: Dynamic task suggestion based on detected facial emotion and user-defined tasks.
-    *   Core Feature 4: Simple mood logging (based on detected facial emotion - placeholder for now).
-    *   Minimalist dark mode UI (SPA-like).
-    *   Out of Scope for MVP: Advanced analytics, HR/Manager views, complex alerts, user accounts (initially).
+2.  **Core Goal (Current Phase):** Refactor existing code for better readability and folder structure. Enhance frontend with a header, navigation (Home, Add Tasks, Remove Tasks, Give Tasks), and make it responsive. Implement backend logic for removing tasks.
+3.  **Technology Stack (Confirmed):
+    *   **Frontend:** React with Vite, Tailwind CSS, React Router.
+    *   **Backend:** Python with FastAPI.
+    *   **Task Storage:** Local JSON file (`tasks.json`).
+    *   **ML:** Pre-trained facial emotion recognition model (`deepface`).
+4.  **Expanded Scope (Current Phase):
+    *   **Code Refactoring:** Organize frontend and backend code into logical folder structures (components, services, routes, etc.).
+    *   **Frontend Navigation:** Implement a header and routing for Home, Add Tasks, Remove Tasks, and Give Tasks (Emotion Analysis) sections.
+    *   **Home Section:** Static content about the website and team.
+    *   **Remove Tasks Section:** UI to list and delete tasks (calling a new backend endpoint).
+    *   **Responsiveness:** Ensure the frontend layout adapts to different screen sizes.
+    *   **Backend Task Deletion:** Implement `DELETE /tasks/{task_id}` endpoint.
 5.  **Architectural Approach:** Modular Monolith (as per `systemPatterns.md`), with new Task Management capabilities.
 
 ## Next Steps:
 
-1.  Update `currentTask.md` to detail implementation of task management and dynamic suggestions.
-2.  Update `progress.md` with new feature milestones.
-3.  Proceed with implementation in Act Mode.
+1.  Update `currentTask.md` to detail the refactoring and new frontend/backend feature implementation.
+2.  Update `progress.md` with these new refactoring and feature milestones.
+3.  Proceed with implementation in Act Mode, starting with folder structure and backend refactoring/enhancements.
 
 ## Resolved Questions:
 

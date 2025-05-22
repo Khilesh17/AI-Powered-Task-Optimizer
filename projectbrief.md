@@ -12,6 +12,8 @@ The Zidio AI-Powered Task Optimizer is a system designed to leverage data scienc
 - To implement a system for historical mood tracking and trend analysis for individual employees and teams.
 - To create an alert mechanism for HR/management regarding employees experiencing prolonged stress or disengagement.
 - To ensure robust data privacy and security, including anonymization of sensitive data.
+- To refactor the codebase for improved readability, maintainability, and adherence to best practices, including a well-defined folder structure.
+- To enhance the frontend with a structured layout including a header and distinct sections for Home, Add Tasks, Remove Tasks, and Give Tasks (Emotion Analysis).
 
 ## 3. Key Features
 
@@ -21,7 +23,13 @@ The Zidio AI-Powered Task Optimizer is a system designed to leverage data scienc
 - **Stress Management Alerts:** Automated notifications to HR or managers when an employee's mood indicates prolonged stress or disengagement.
 - **Team Mood Analytics:** Aggregation of mood data to identify overall team morale and productivity trends.
 - **Data Privacy:** Strict adherence to data privacy principles, ensuring sensitive data is anonymized and securely stored.
-- **User-Defined Task Management:** Ability for users to add new tasks and associate them with specific emotions for the recommendation engine.
+- **User-Defined Task Management:** Ability for users to add new tasks (via a dedicated 'Add Tasks' section) and associate them with specific emotions. Includes a 'Remove Tasks' section for managing existing tasks.
+- **Structured Frontend UI:** A responsive multi-section frontend with a header, including:
+    - Home: Details about the website and team.
+    - Add Tasks: Interface for adding new tasks.
+    - Remove Tasks: Interface for managing/deleting existing tasks.
+    - Give Tasks (Emotion Analysis): The core facial emotion detection and task suggestion feature.
+- **Code Refactoring & Best Practices:** Application of good folder structures and coding practices for enhanced readability and maintainability.
 
 ## 4. Target Users
 
