@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import ConfirmationModal from '../components/common/ConfirmationModal'; // Import the modal
+import Button from '../components/common/Button'; // Import common Button
 
 // TODO: Import Task interface if moved to a shared types file
 interface Task {
@@ -12,7 +14,12 @@ const RemoveTaskPage: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [deleteStatus, setDeleteStatus] = useState<{ [key: string]: string | null }>({}); // To show status per task
+    const [deleteStatus, setDeleteStatus] = useState<{ [key: string]: string | null }>({});
+
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [taskToDeleteId, setTaskToDeleteId] = useState<string | null>(null);
+    const [taskToDeleteDescription, setTaskToDeleteDescription] = useState<string>('');
+
 
     const fetchTasks = async () => {
         setIsLoading(true);
@@ -35,73 +42,104 @@ const RemoveTaskPage: React.FC = () => {
         fetchTasks();
     }, []);
 
-    const handleDeleteTask = async (taskId: string) => {
-        setDeleteStatus(prev => ({ ...prev, [taskId]: 'Deleting...' }));
+    const actualDeleteTaskLogic = async () => {
+        if (!taskToDeleteId) return;
+
+        setDeleteStatus(prev => ({ ...prev, [taskToDeleteId]: 'Deleting...' }));
+        setShowDeleteModal(false); // Close modal before API call
+
         try {
-            const response = await fetch(`http://localhost:8000/api/v1/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:8000/api/v1/tasks/${taskToDeleteId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
-                // If server sends error details in JSON format
                 const errorData = await response.json().catch(() => null);
                 throw new Error(errorData?.detail || `Failed to delete task (status: ${response.status})`);
             }
-            // On successful deletion (204 No Content), refetch tasks to update the list
-            setDeleteStatus(prev => ({ ...prev, [taskId]: 'Deleted successfully!' }));
+            setDeleteStatus(prev => ({ ...prev, [taskToDeleteId]: 'Deleted successfully!' }));
             fetchTasks();
-            // Optionally clear success message after a few seconds
-            setTimeout(() => setDeleteStatus(prev => ({ ...prev, [taskId]: null })), 3000);
+            setTimeout(() => {
+                setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: null }));
+                setTaskToDeleteId(null);
+            }, 3000);
         } catch (err) {
             const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred during deletion.';
-            setDeleteStatus(prev => ({ ...prev, [taskId]: errorMessage }));
-            console.error(`Failed to delete task ${taskId}:`, err);
-            // Optionally clear error message after a few seconds
-            setTimeout(() => setDeleteStatus(prev => ({ ...prev, [taskId]: null })), 5000);
+            setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: errorMessage }));
+            console.error(`Failed to delete task ${taskToDeleteId}:`, err);
+            setTimeout(() => {
+                setDeleteStatus(prev => ({ ...prev, [taskToDeleteId!]: null }));
+                setTaskToDeleteId(null);
+            }, 5000);
         }
     };
 
+    const requestDeleteTask = (task: Task) => {
+        setTaskToDeleteId(task.id);
+        setTaskToDeleteDescription(task.description);
+        setShowDeleteModal(true);
+    };
+
     return (
-        <div className="bg-gray-800 p-6 md:p-8 rounded-lg shadow-xl w-full max-w-3xl flex flex-col items-center animate-fadeIn">
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-sky-400">Manage Tasks</h2>
+        <>
+            <div className="bg-gray-800 p-6 md:p-8 rounded-lg shadow-xl w-full max-w-3xl flex flex-col items-center animate-fadeIn">
+                <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-sky-400">Manage Tasks</h2>
 
-            {isLoading && <p className="text-yellow-400">Loading tasks...</p>}
-            {error && <p className="text-red-400 p-3 bg-red-900/30 rounded-md">Error loading tasks: {error}</p>}
+                {isLoading && <p className="text-yellow-400">Loading tasks...</p>}
+                {error && <p className="text-red-400 p-3 bg-red-900/30 rounded-md">Error loading tasks: {error}</p>}
 
-            {!isLoading && !error && tasks.length === 0 && (
-                <p className="text-gray-400">No tasks found. Add some tasks first!</p>
-            )}
+                {!isLoading && !error && tasks.length === 0 && (
+                    <p className="text-gray-400">No tasks found. Add some tasks via the "Add Task" page!</p>
+                )}
 
-            {!isLoading && !error && tasks.length > 0 && (
-                <div className="w-full space-y-3">
-                    {tasks.map(task => (
-                        <div key={task.id} className="bg-gray-700 p-4 rounded-md flex justify-between items-center shadow">
-                            <div>
-                                <p className="text-lg font-semibold text-gray-100">{task.description}</p>
-                                <p className="text-xs text-gray-400">
-                                    Emotions: {task.associated_emotions.join(', ') || 'None'}
-                                </p>
-                                <p className="text-xs text-gray-500">
-                                    Created: {new Date(task.created_at).toLocaleString()}
-                                </p>
+                {!isLoading && !error && tasks.length > 0 && (
+                    <div className="w-full space-y-3">
+                        {tasks.map(task => (
+                            <div key={task.id} className="bg-gray-700 p-4 rounded-md flex flex-col sm:flex-row justify-between sm:items-center shadow">
+                                <div className="mb-2 sm:mb-0">
+                                    <p className="text-lg font-semibold text-gray-100">{task.description}</p>
+                                    <p className="text-xs text-gray-400">
+                                        Emotions: {task.associated_emotions.join(', ') || 'None'}
+                                    </p>
+                                    <p className="text-xs text-gray-500">
+                                        Created: {new Date(task.created_at).toLocaleString()}
+                                    </p>
+                                </div>
+                                <Button
+                                    onClick={() => requestDeleteTask(task)}
+                                    text={deleteStatus[task.id] === 'Deleting...' ? 'Deleting...' : 'Delete'}
+                                    variant="danger"
+                                    className="text-sm py-1 px-3 w-full sm:w-auto"
+                                    disabled={!!deleteStatus[task.id] && deleteStatus[task.id] === 'Deleting...'}
+                                />
                             </div>
-                            <button
-                                onClick={() => handleDeleteTask(task.id)}
-                                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md text-sm transition disabled:opacity-50"
-                                disabled={!!deleteStatus[task.id] && deleteStatus[task.id] === 'Deleting...'}
-                            >
-                                {deleteStatus[task.id] === 'Deleting...' ? 'Deleting...' : 'Delete'}
-                            </button>
-                        </div>
-                    ))}
-                    {tasks.map(task => deleteStatus[task.id] && (
-                        <p key={`${task.id}-status`}
-                            className={`text-xs mt-1 ${deleteStatus[task.id]?.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
-                            Task "{task.description.substring(0, 20)}...": {deleteStatus[task.id]}
-                        </p>
-                    ))}
-                </div>
+                        ))}
+                        {/* Displaying status messages separately to avoid layout shifts within map */}
+                        {Object.entries(deleteStatus).map(([id, statusMsg]) => {
+                            if (!statusMsg) return null;
+                            const task = tasks.find(t => t.id === id);
+                            return (
+                                <p key={`${id}-status`}
+                                    className={`text-xs mt-1 ${statusMsg.includes('successfully') ? 'text-green-400' : 'text-red-400'}`}>
+                                    Task "{task ? task.description.substring(0, 20) + '...' : id}": {statusMsg}
+                                </p>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
+            {taskToDeleteId && (
+                <ConfirmationModal
+                    isOpen={showDeleteModal}
+                    onClose={() => { setShowDeleteModal(false); setTaskToDeleteId(null); }}
+                    title="Confirm Task Deletion"
+                    message={`Are you sure you want to delete the task: "${taskToDeleteDescription}"? This action cannot be undone.`}
+                    confirmText="Yes, Delete Task"
+                    onConfirm={actualDeleteTaskLogic}
+                    cancelText="No, Cancel"
+                    confirmButtonVariant="danger"
+                />
             )}
-        </div>
+        </>
     );
 };
 

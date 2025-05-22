@@ -1,6 +1,8 @@
 import React from 'react';
 import TeamMemberCard from '../components/TeamMemberCard';
 import khileshImage from "../assets/khilesh.jpg";
+import triptiImage from "../assets/tripti.png";
+import shreyanshImage from "../assets/shreyansh.png";
 
 // Define the TeamMember interface (could also be in a shared types file)
 interface TeamMember {
@@ -13,9 +15,9 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
     { id: 1, name: 'Khilesh Katre', role: 'Team Lead + Full Stack Developer', imageUrl: khileshImage, linkedinUrl: 'https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAADjH628BmoTC5jQtHxxbMesYQYeigrq1JOc&keywords=Khilesh%20Katre&origin=ENTITY_SEARCH_HOME_HISTORY&sid=Ok!' },
-    { id: 2, name: 'Tripti', role: 'Full Stack Developer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
-    { id: 3, name: 'Shriyansh Shrivastava ', role: 'Designer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
-    { id: 4, name: 'Raj Aryan Purohit', role: 'Devops Engineer', imageUrl: '/profile-placeholder.png', linkedinUrl: '#' },
+    { id: 2, name: 'Tripti', role: 'Full Stack Developer', imageUrl: triptiImage, linkedinUrl: '#' },
+    { id: 3, name: 'Shriyansh Shrivastava ', role: 'Designer', imageUrl: shreyanshImage, linkedinUrl: '#' },
+    { id: 4, name: 'Raj Aryan Purohit', role: 'Devops Engineer', imageUrl: shreyanshImage, linkedinUrl: '#' },
 ];
 
 

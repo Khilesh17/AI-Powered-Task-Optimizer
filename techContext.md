@@ -10,6 +10,9 @@ This stack is chosen for simplicity, rapid development for the MVP, and core ML 
 - **State Management:** Zustand or Redux Toolkit (Zustand for simplicity, Redux Toolkit for more complex state).
 - **Data Fetching:** TanStack Query (React Query) or native `fetch`.
 - **Routing:** React Router (`react-router-dom`) for multi-page/section navigation.
+- **Common UI Components:**
+    - `Button.tsx`: Reusable button with variants (primary, secondary, danger).
+    - `ConfirmationModal.tsx`: Reusable modal for user confirmations.
 
 ### 1.2. Backend
 - **Language/Framework:** Python with FastAPI (Reverted to Python for stronger Computer Vision library support for facial detection).
